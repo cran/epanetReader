@@ -17,7 +17,7 @@
 #'
 #' \item{nodeResults}{data.frame}
 #' \item{linkResults}{data.frame}
-
+#'
 #' @details add lines "Page 0", "Links All" and "Nodes All" to the
 #'  [REPORT] section of the .inp file to output info to read in
 #' with this function
@@ -30,7 +30,8 @@
 #' 
 #'
 #' @references Rossman, L. A. (2000). Epanet 2 users manual. US EPA, Cincinnati, Ohio.
-# http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf
+#'
+#' http://nepis.epa.gov/Adobe/PDF/P1007WWU.pdf
 #'
 #' @examples
 #' # path to Net1.rpt example file included with this package
@@ -151,7 +152,7 @@ epanet.rpt <- function( file){
 
 #' Summary of Epanet Simulation Results
 #'
-#' Provides a basic sumary of simulation results 
+#' Provides a basic summary of simulation results 
 #'
 #' @export
 #' @param  object of epanet.rpt class
@@ -399,7 +400,7 @@ print.summary.epanet.rpt <- function(x,...){
 			evt <- expandedLinkTable(inp$Valves, inp$Coordinates)
 			# add bin info to table 
 			# could write merge.expandedLinkTable() but prolly not worth it 
-			ept2 <- merge( x = ept, by.x = "ID", y = lqty, by.y = "Link")
+			ept2 <- merge( x = evt, by.x = "ID", y = lqty, by.y = "ID")
 	
 			# plot the segments 
 			graphics::segments( x0 = ept2$x1, y0 = ept2$y1,
@@ -412,7 +413,7 @@ print.summary.epanet.rpt <- function(x,...){
 	}
 }
 
-#' @param ndqty
+#' @param ndqty the node quantity 
 #' @param inp epanet.inp object 
 .plotRptNodes <- function(ndqty, inp){
 	
@@ -564,7 +565,7 @@ plot.epanet.rpt <- function( x,
     graphics::par( mar = c(1,1,1,1))
 	graphics::plot( range(inp$Coordinates$X.coord),
 			range(inp$Coordinates$Y.coord),
-			type = 'n',
+			type = 'n', asp = 1,
 			xlab = "", xaxt = 'n',
 			ylab = "", yaxt = 'n'
 	)
