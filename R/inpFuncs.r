@@ -24,7 +24,9 @@
   begin <- grep(tag, allLines)  + 1 
   
   if( length(begin) > 1 ){
-    stop( paste(tag, "appeared more than once"))
+    warning( paste("The section ", tag, " appeared more than once in the inp file and so was not read.",
+				   "\nTry opening the .inp file in a text editor and deleting the duplicate section."))
+    return( as.numeric(NA) )
   }
   # file lines starting with [ aka taglines  
   tl <- grep("\\s*\\[",allLines)
@@ -107,12 +109,18 @@
   
   sect <- .inpSection2char(tag, allLines)
 
+  
+
   if( is.null(sect)){
     return(NULL)
   } else { 
-  
+    # get the right number of columns by taking
+    # the max length of all records 
+    numcols <- max(  sapply( strsplit(sect,split = " ") , length ) ) 
+ 
     # convert the data into a data frame 
     df <- utils::read.table( text= sect, as.is = TRUE, 
+                     col.names = paste0("V", 1:numcols), 
                       fill = TRUE, header = FALSE)  
     
     return( df )
@@ -678,3 +686,155 @@ STATUS <- function( allLines ){
 }
 
 
+CONTROLS <- function( allLines ){
+  tag <- "\\[CONTROLS\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
+
+EMITTERS <- function( allLines){
+	
+	tag <- "\\[EMITTERS\\]"
+	df <- .inpSection2df(tag, allLines)  
+	
+	if( is.null( df ) ){
+		return( NULL )  
+	} else {   
+		names(df)[1] <- "ID"
+		df$ID <- as.character(df$ID)
+		
+		names(df)[2] <- "FlowCoef"
+		
+		return( df )
+	}
+	
+}
+
+QUALITY <- function( allLines){
+	
+	tag <- "\\[QUALITY\\]"
+	df <- .inpSection2df(tag, allLines)  
+	
+	if( is.null( df ) ){
+		return( NULL )  
+	} else {   
+		names(df)[1] <- "ID"
+		df$ID <- as.character(df$ID)
+		
+		names(df)[2] <- "InitQual"
+		
+		return( df )
+	}
+	
+}
+
+SOURCES <- function( allLines ){
+	
+	tag <- "\\[SOURCES\\]"
+	df <- .inpSection2df(tag, allLines)  
+	
+	if( is.null(df)) {
+		return( NULL )  
+	} else {   
+		# rename the columns
+		names(df)[1:3] <- c("ID","Type","Quality")
+		
+		#convert id field to character
+		df$ID <- as.character(df$ID)
+		
+		# deal w optional fields
+		if( dim(df)[2]>3){
+			names(df)[4] <- "Pattern"        
+			df$Pattern <- as.factor(df$Pattern)
+		} else {
+			df$Pattern = NA
+		}
+		
+		return(df)
+	} 
+	
+}
+
+
+REACTIONS <- function( allLines ){
+  tag <- "\\[REACTIONS\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
+
+MIXING <- function( allLines){
+	
+	tag <- "\\[MIXING\\]"
+	df <- .inpSection2df(tag, allLines)  
+	
+	if( is.null(df)) {
+		return( NULL )  
+	} else {   
+		# rename the columns
+		names(df)[1:2] <- c("ID","Model") 
+		
+		#convert id field to character
+		df$ID <- as.character(df$ID)
+
+		# deal w optional fields
+		if( dim(df)[2]>2){
+			names(df)[3] <- "CompartmentVolumeFraction"
+		} else {
+			df$CompartmentVolumeFraction = NA
+		}
+		
+		return(df)
+	} 
+}
+
+
+REPORT <- function( allLines ){
+  tag <- "\\[REPORT\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
+
+
+VERTICES <- function( allLines ){
+  
+  tag <- "\\[VERTICES\\]"
+  df <- .inpSection2df(tag, allLines)  
+
+  if( is.null(unlist(df)[1])){
+    return( NULL )  
+  } else {   
+    #proceed as usual
+    
+    # rename the columns
+    names(df)[1:3] <- c("ID","X.coord","Y.coord")
+    
+    #convert id field to character
+    df$ID <- as.character(df$ID)
+    
+    return( df )
+  }
+}
+
+
+LABELS <- function( allLines ){
+  tag <- "\\[LABELS\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
+
+BACKDROP <- function( allLines ){
+  tag <- "\\[BACKDROP\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
+
+TAGS <- function( allLines ){
+  tag <- "\\[TAGS\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}
+RULES <- function( allLines ){
+  tag <- "\\[RULES\\]"
+  sect <- .inpSection2char(tag,allLines)
+  return(sect)  
+}

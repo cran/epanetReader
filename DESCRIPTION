@@ -1,11 +1,12 @@
 Package: epanetReader
 Type: Package
 Title: Read Epanet Files into R
-Version: 0.3.1
-Date: 2016-02-02
+Version: 0.4.0
+Date: 2016-08-10
 Author: Bradley J. Eck
 Maintainer: Bradley Eck <brad@bradeck.net>
 Depends: R (>= 3.0.0), graphics, utils
+Suggests: Kmisc (>= 0.5.0)
 Description: Reads water network simulation data in Epanet's text-based
     '.inp' and '.rpt' formats into R. Also reads results from Epanet-msx.
     Provides basic summary information and plots. 
@@ -16,6 +17,6 @@ License: MIT + file LICENSE
 LazyData: true
 RoxygenNote: 5.0.1
 NeedsCompilation: no
-Packaged: 2016-02-02 22:10:52 UTC; Brad
+Packaged: 2016-08-10 15:57:35 UTC; brad
 Repository: CRAN
-Date/Publication: 2016-02-03 01:25:10
+Date/Publication: 2016-08-10 21:15:42
