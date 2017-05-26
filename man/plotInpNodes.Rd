@@ -16,7 +16,7 @@ Adds node elements from epanet.inp object to an existing plot
 }
 \details{
 Helper function for building up a network plot. Tanks and
-Reservoirs are shown using plot characters (pch) '           16 and 15.
+Reservoirs are shown using plot characters (pch) 16 and 15.
 Junctions, if plotted, appear as pch ="."
 }
 \examples{
@@ -25,4 +25,3 @@ plot( range(Net1$Coordinates$X), range(Net1$Coordinates$Y), type = 'n')
 ## add the nodes, including junctions 
 plotInpNodes(Net1, TRUE ) 
 }
-

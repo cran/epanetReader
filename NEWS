@@ -1,3 +1,11 @@
+epanetReader version 0.5.0 (released May 2017)
+==============================================
+Changes:
+* Added option to include [LABELS] in plots
+
+* Added test suite to CRAN version
+
+
 epanetReader version 0.4.0 (released Aug 2016)
 ==============================================
 Changes:

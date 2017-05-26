@@ -17,11 +17,13 @@
 
 \item{juncQty}{string specifying which column of x$nodeResults
 (Demand, Head, Pressure, Chlorine, etc.) 
-to show by circle size at network junctions}
+to show by circle size at network junctions or NULL
+if no quantity should be plotted at the junctions}
 
 \item{linkQty}{string specifying which column of x$linkResults
 (Flow, Velocity, Headloss)
-to show by line width on network links}
+to show by line width on network links or NULL
+if now quantity should be plotted for the links.}
 
 \item{legend1.locn}{string passed to legend() for placing legend of network elements}
 
@@ -37,4 +39,3 @@ juncQty plots and values for Junctions only; Tanks and Reservoirs are not includ
          In contrast, linkQty is scaled over all of the link types: Pipes, Pumps & Valves.
          These choices aim at a map showing demand at junctions and velocity in links.
 }
-

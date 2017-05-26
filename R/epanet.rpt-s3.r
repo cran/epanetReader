@@ -18,9 +18,9 @@
 #' \item{nodeResults}{data.frame}
 #' \item{linkResults}{data.frame}
 #'
-#' @details add lines "Page 0", "Links All" and "Nodes All" to the
-#'  [REPORT] section of the .inp file to output info to read in
-#' with this function
+#' @details Add lines "Page 0", "Links All" and "Nodes All" to the
+#'  [REPORT] section of the .inp file so that the Epanet simulation
+#'  outputs information to read with this function.
 #'
 #' In contrast to the treatment of .inp files, data from .rpt
 #' files is stored using a slightly different structure than the .rpt file.  The
@@ -263,13 +263,13 @@ print.summary.epanet.rpt <- function(x,...){
 }
 
 
-#' Get link quantity at a timestep
-#'
-#' Extract a table of results for a time step
-#' @param rpt epanet.rpt object
-#' @param linkQty string with quantity to get
-#' @param Timestep string  in h:mm:ss form 
-#' @return data.frame with cols "Link" and linkQty
+# Get link quantity at a timestep
+#
+# Extract a table of results for a time step
+# @param rpt epanet.rpt object
+# @param linkQty string with quantity to get
+# @param Timestep string  in h:mm:ss form 
+# @return data.frame with cols "Link" and linkQty
 .getLinkQtyAtTime <-function( rpt, linkQty, Timestep){
 
   if( is.null(linkQty)){
@@ -308,13 +308,13 @@ print.summary.epanet.rpt <- function(x,...){
 
 
 
-#' Get junc quantity at a timestep
-#'
-#' Extract a table of results for a time step
-#' @param rpt epanet.rpt object
-#' @param juncQty string with quantity to get
-#' @param Timestep string  in h:mm:ss form 
-#' @return data.frame with cols "Node" and juncQty
+# Get junc quantity at a timestep
+#
+# Extract a table of results for a time step
+# @param rpt epanet.rpt object
+# @param juncQty string with quantity to get
+# @param Timestep string  in h:mm:ss form 
+# @return data.frame with cols "Node" and juncQty
 .getNodeQtyAtTime <- function(rpt,juncQty,Timestep){
 # validate juncQty
   if( is.null(juncQty)){ 
@@ -415,8 +415,8 @@ print.summary.epanet.rpt <- function(x,...){
 	}
 }
 
-#' @param ndqty the node quantity 
-#' @param inp epanet.inp object 
+# @param ndqty the node quantity 
+# @param inp epanet.inp object 
 .plotRptNodes <- function(ndqty, inp){
 	
 	if( is.null( ndqty)){
@@ -441,10 +441,8 @@ print.summary.epanet.rpt <- function(x,...){
 	}
 }
 
-#' plot legend for results
-#' 
-#' helper function to plot a legend for the simulation results 
-
+# plot legend for results
+# helper function to plot a legend for the simulation results 
 .plotRptLegend <- function(juncQty, juncBinfo, linkQty, linkBinfo, legend2.locn){
 	# use legend with three values  for each qty  
 	if( is.null(juncBinfo)){
@@ -504,10 +502,12 @@ print.summary.epanet.rpt <- function(x,...){
 #' @param Timestep string indicating the time to plot 
 #' @param juncQty string specifying which column of x$nodeResults
 #'                (Demand, Head, Pressure, Chlorine, etc.) 
-#'                to show by circle size at network junctions  
+#'                to show by circle size at network junctions or NULL
+#'                if no quantity should be plotted at the junctions  
 #' @param linkQty string specifying which column of x$linkResults  
 #'                (Flow, Velocity, Headloss)
-#'                to show by line width on network links  
+#'                to show by line width on network links or NULL
+#'                if now quantity should be plotted for the links. 
 #' @param legend1.locn string passed to legend() for placing legend of network elements
 #' @param legend2.locn string passed to legend() for placing legend of junction and link quantities
 #' @param ... further arguments passed to plot 
