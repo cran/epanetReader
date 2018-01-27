@@ -19,9 +19,9 @@ Returns an epanet.rpt S3 object with two data.frame elements.
 reads an Epanet .rpt file into R
 }
 \details{
-Add lines "Page 0", "Links All" and "Nodes All" to the
- [REPORT] section of the .inp file so that the Epanet simulation
- outputs information to read with this function.
+add lines "Page 0", "Links All" and "Nodes All" to the
+ [REPORT] section of the .inp file to output info to read in
+with this function
 
 In contrast to the treatment of .inp files, data from .rpt
 files is stored using a slightly different structure than the .rpt file.  The

@@ -99,6 +99,9 @@ read.inp <- function (file ){
 epanet.inp <- function( file ){
 	
 	allLines <- read_lines_wrapper( file )
+	
+	# remove comments  
+	allLines <-  gsub( ";.*$", "", allLines)
   
   # read in all the sections  
   titl <- TITLE( allLines )
@@ -261,7 +264,7 @@ plotInpLinks <- function(x, lwd=3, col='black'){
 #' @param x epanet.inp object
 #' @param plot.junctions logical indicating whether to plot junctions 
 #' @details  Helper function for building up a network plot. Tanks and
-#' Reservoirs are shown using plot characters (pch) 16 and 15.
+#' Reservoirs are shown using plot characters (pch) '           16 and 15.
 #' Junctions, if plotted, appear as pch ="."
 #' @examples 
 #' ## make a new blank plot 
@@ -345,6 +348,7 @@ plotElementsLegend <- function(legend.locn) {
 #' the helper functions plotInpLinks(), plotInpNodes(), plotElementsLegend().  
 #' @examples
 #' plot(Net1) 
+#' plot(Net1, plot.labels=TRUE)
 plot.epanet.inp <- function( x, 
                              plot.junctions  = TRUE,
                              legend.locn = "topright",
@@ -390,4 +394,11 @@ plotInpLabels <- function(x){
 	graphics::text(xx,yy,lab)
 }
 
+#' Check if an object as class 'epanet.inp' 
+#'
+#' @param x an R object 
+#' @export
+is.epanet.inp <- function(x){
+  inherits(x,"epanet.inp")
 
+}

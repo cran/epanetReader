@@ -14,6 +14,8 @@ test_that("net1.inp reads correctly",
                expect_that( Net1$Curves$`1`$Y , equals(250))
 			   expect_that( length(Net1$Controls), equals(2))
 			   expect_that( dim(Net1$Quality)[1], equals(11))
+
+   expect_true( is.epanet.inp( Net1) )
     
 })
 
@@ -41,6 +43,17 @@ test_that("read Net3.inp",{
 			expect_false( is.null(Net3$Status))
 			expect_true(Net3$Status$Status[1] == 'Closed')
 		})
+
+test_that("icdm.inp",{
+
+
+  net <- suppressWarnings( read.inp("icdm13.inp") ) 
+
+  numPipes <- dim( net$Pipes)[1] 
+  expect_equal( numPipes, 21 ) 
+
+})
+
 
 
 context("summary.epanet.inp s3 object") 

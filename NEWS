@@ -1,9 +1,9 @@
-epanetReader version 0.5.0 (released May 2017)
-==============================================
+epanetReader version 0.6.2 (released Jan 2018)
+=============================================
 Changes:
-* Added option to include [LABELS] in plots
-
-* Added test suite to CRAN version
+* added is.XXX functions to check class of S3 objects
+* update built-in datasets with latest package output and check this with examples
+* handle inp file with an empty options section  
 
 
 epanetReader version 0.4.0 (released Aug 2016)

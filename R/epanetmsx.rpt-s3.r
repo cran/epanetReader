@@ -18,8 +18,8 @@
 #' \item{nodeResults}{data.frame}
 #' \item{linkResults}{data.frame}
 #' @details  Specify the needed outputs from an Epanet-msx simulation in the
-#'  [REPORT] section of the .msx file to create reports for reading  
-#'  with this function. 
+#'  [REPORT] section of the .msx file to create reports for reading with 
+#' with this function. 
 #'
 #' The function returns an S3 object (list) with a data.frame for node results and
 #' data.frame for link results.  These data.frames contain results from all
@@ -269,6 +269,14 @@ plot.epanetmsx.rpt <- function(x, elementType = 'Nodes',...){
 
 
 
+#' Check if an object has class 'epanetmsx.rpt' 
+#'
+#' @param x an R object 
+#' @export
+is.epanetmsx.rpt <- function(x){
+  inherits(x,"epanetmsx.rpt")
+
+}
 
  
 

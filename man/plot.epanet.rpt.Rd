@@ -17,13 +17,11 @@
 
 \item{juncQty}{string specifying which column of x$nodeResults
 (Demand, Head, Pressure, Chlorine, etc.) 
-to show by circle size at network junctions or NULL
-if no quantity should be plotted at the junctions}
+to show by circle size at network junctions}
 
 \item{linkQty}{string specifying which column of x$linkResults
 (Flow, Velocity, Headloss)
-to show by line width on network links or NULL
-if now quantity should be plotted for the links.}
+to show by line width on network links}
 
 \item{legend1.locn}{string passed to legend() for placing legend of network elements}
 
