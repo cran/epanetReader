@@ -189,6 +189,7 @@ checkRptFile <- function( allLines ){
    # look for node results and link results 
    hasNodeResults <- as.logical( max( grepl("Node Results", allLines)))
    hasLinkResults <- as.logical( max( grepl("Link Results", allLines)))
+   hasEnergyResults <- as.logical( max( grepl("Energy Usage", allLines)))
 
    if( hasNodeResults == FALSE ){
   
@@ -204,9 +205,12 @@ checkRptFile <- function( allLines ){
      warning(msg)
    }
 
+   
+
 
    if( ( hasNodeResults == FALSE )& 
-       ( hasLinkResults == FALSE )  ){
+       ( hasLinkResults == FALSE )&
+       ( hasEnergyResults==FALSE )  ){
        
        # no results to read, give error 
        stop("No results to read")
@@ -235,4 +239,37 @@ cleanRptLines <- function( allLines ){
 	
 	return( cleanLines)
 	
+}
+
+getEnergyUsage <- function( cleanLines ){
+ 
+  tag <- grep("Energy Usage", cleanLines) 
+ 
+  result <- NULL 
+   
+  if( length(tag) > 1  ){
+    warning("The string 'Energy Usage' appeared more than once in the rpt file so the energy usage table was not read")
+    
+  } else if ( length(tag) == 1 ){
+    # Energy Usage table exists
+    begin <- tag + 5
+    bars <- grep("-----",cleanLines)
+    end <- bars[ which( bars > begin)[1] ] - 1 
+    
+    # get the correct names for the cols  
+    varnames <- c("Pump","usageFactor","avgEfficiency", "kWh_per_m3","avg_kW","peak_kW","dailyCost") 
+    if( grepl("Mgal",cleanLines[ tag+3])){
+      varnames[4] <- "kWh_per_Mgal"
+    }
+    
+    # build a data frame of energy usage     
+    egyusg <- utils::read.table( text = cleanLines[begin:end], 
+                      stringsAsFactors = FALSE,
+                      col.names = varnames) 
+    result <- egyusg
+    
+  } 
+  
+  return( result) 
+  
 }
