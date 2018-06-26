@@ -1,4 +1,4 @@
-623a76d4bc0c3a0cd21b6e3fd675b9be *DESCRIPTION
+51695b22f70877e9ab92d9fc716cc128 *DESCRIPTION
 8a4077a810af980aa3015a1b1c560715 *LICENSE
 5dbe8c7d6cc02950928e6329074e586e *NAMESPACE
 66f0a2a75bcf62c3f5088333247358d8 *NEWS
@@ -76,15 +76,17 @@ c22984dad13a73ef34fb4941191d3d29 *tests/testthat/Net3-gui.rpt
 f4008f178767fe27c77dd40252ddf57c *tests/testthat/Net3-nodes.rpt
 827dedc2428920b7a1760a62963b6ece *tests/testthat/Net3.inp
 b4924f869cdd68fbccc49a219bb4766d *tests/testthat/Net3.rpt
+5d223dea6b7afbd93756e846c45036d8 *tests/testthat/README.html
 6e5e5bab3607b87c31c8d37116f7f2e9 *tests/testthat/README.rmd
-d6d3dc3f2587376a94f2515897faa629 *tests/testthat/benchmarks.r
+46e9c8a37319e8a68acf642e1ff91ab2 *tests/testthat/README_files/figure-gfm/Net1rpt.png
+0a2ad7ae50f11f9490fb090a3972b15e *tests/testthat/README_files/figure-gfm/unnamed-chunk-11-1.png
+36267043fdb315c669ffc5c16c1923d8 *tests/testthat/README_files/figure-gfm/unnamed-chunk-3-1.png
 d3db48a3c28aad1ea3d70afad670d27b *tests/testthat/empty.inp
 fedc201e22cdebb8646b3c37a9d96230 *tests/testthat/example-noLinks.rpt
 81e3138f9dc087a7aeee8c4ae829cf74 *tests/testthat/example-noNodes.rpt
 027a4cee011b768b477b08e11b1c95a2 *tests/testthat/example-noTitle.rpt
 e800622cbbaf0635ef7427f6382fb60f *tests/testthat/example.rpt
 6fd09d0f8d1ed335646d8d4b79ee30d3 *tests/testthat/for-various-tests.inp
-6e8fcba3cacd8f775296025edd3cf9f5 *tests/testthat/helper.r
 f96326358f7cfb80db43a56025e0cdf4 *tests/testthat/icdm13.inp
 c4433196ec18bc608ffb11556450878d *tests/testthat/inp-pipe-table-some-statuses-empty.txt
 3b7dc067472f27d20fa99b45e4f8e8f4 *tests/testthat/oneprv.inp
