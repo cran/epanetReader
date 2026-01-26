@@ -30,6 +30,9 @@
   }
   # file lines starting with [ aka taglines  
   tl <- grep("\\s*\\[",allLines)
+  # treat the last line of the file as a tagline in case 
+  # the usual [END] is missing from the end of the file
+  tl <- c(tl, length(allLines))
   #choose the first one after begin 
   end <- tl[ which(tl>begin)[1] ] - 1 
 
@@ -103,7 +106,7 @@
   }
 }
 
-.inpSection2df <- function(tag, allLines){
+.inpSection2df <- function(tag, allLines, charCols = c(1)){
   # private helper function to get some section from
   # an inp file and read it to a data frame 
   
@@ -118,10 +121,16 @@
     # the max length of all records 
     numcols <- max(  sapply( strsplit(sect,split = " ") , length ) ) 
  
-    # convert the data into a data frame 
+    colClasses = rep.int(NA, numcols)
+    for (idx in charCols) {
+      colClasses[idx] = "character"
+    }
+    
+    # convert the data into a data frame
     df <- utils::read.table( text= sect, as.is = TRUE, 
                      col.names = paste0("V", 1:numcols), 
-                      fill = TRUE, header = FALSE)  
+                     fill = TRUE, header = FALSE,
+                     colClasses = colClasses)  
     
     return( df )
   }
@@ -255,7 +264,7 @@ TANKS <- function( allLines ){
 ##        exported from the Epanet GUI
 PIPES <- function( allLines ){
 	tag <- "\\[PIPES\\]"
-	df <- .inpSection2df(tag, allLines)  
+	df <- .inpSection2df(tag, allLines, charCols = c(1,2,3))  
 	
 	
 	if( is.null(df ) ) { 
@@ -296,7 +305,7 @@ PIPES <- function( allLines ){
 ##        exported from the Epanet GUI
 PUMPS <- function( allLines ){
 	tag <- "\\[PUMPS\\]"
-	df <- .inpSection2df(tag, allLines)  
+	df <- .inpSection2df(tag, allLines, charCols = c(1,2,3))  
 	
 	
 	if( is.null( df )) { 
@@ -334,7 +343,7 @@ PUMPS <- function( allLines ){
 VALVES <-function( allLines){
   
   tag <- "\\[VALVES\\]"
-  df <- .inpSection2df(tag, allLines)  
+  df <- .inpSection2df(tag, allLines, charCols = c(1,2,3))  
   
 #  if( is.na( unlist(df)[1] )){
   if( is.null(df) ) { 
@@ -820,7 +829,7 @@ VERTICES <- function( allLines ){
 
 LABELS <- function( allLines ){
   tag <- "\\[LABELS\\]"
-  df <- .inpSection2df(tag,allLines)
+  df <- .inpSection2df(tag,allLines, charCols = c())
   if( is.null(unlist(df)[1])){
     return( NULL )  
   } else {   

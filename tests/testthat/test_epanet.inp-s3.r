@@ -54,6 +54,14 @@ test_that("icdm.inp",{
 
 })
 
+test_that("read Net4.inp loads correct ids", {
+  Net4  <- suppressWarnings(read.inp("Net4.inp"))
+  
+  expect_equal(Net4$Junctions$ID, c("0022", "3", "004", "5"))
+  
+  expect_equal(Net4$Pipes$Node1, c("N1", "0022", "3", "0022", "004"))
+  expect_equal(Net4$Pipes$Node2, c("0022", "3", "004", "5", "5"))
+})
 
 
 context("summary.epanet.inp s3 object") 
@@ -101,3 +109,34 @@ test_that("Plot Net 3 labels",{
 			x  <- suppressWarnings(read.inp("Net3.inp"))
 			plot(x , plot.labels=T, link.lwd=1, link.col='red')
 		})
+
+
+context("inp files without [END] work")
+test_that("Net1 works without END",{
+		  n1 <- suppressWarnings(read.inp("Net1.inp"))
+		  n1noEND <- suppressWarnings(read.inp("Net1-noEND.inp"))
+		  expect_true( all.equal(n1, n1noEND))
+		}
+)
+
+test_that("Net2 works without END",{
+		  n2 <- suppressWarnings(read.inp("Net2.inp"))
+		  n2noEND <- suppressWarnings(read.inp("Net2-noEND.inp"))
+		  expect_true( all.equal(n2, n2noEND))
+		}
+)
+test_that("Net3 works without END",{
+		  n3 <- suppressWarnings(read.inp("Net3.inp"))
+		  n3noEND <- suppressWarnings(read.inp("Net3-noEND.inp"))
+		  expect_true( all.equal(n3, n3noEND))
+		}
+)
+
+
+context("handle missing file gracefully")
+test_that("error on no file",{
+
+		  expect_error( read.inp("some-random-file.inp") )
+}
+)
+
